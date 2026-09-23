@@ -3,9 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Webpage Test Environment</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --card-color: #ffffff;
+            --text-color: #1e293b;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--card-color);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .flex-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .status-box {
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #f1f5f9;
+            border-left: 4px solid var(--primary-color);
+        }
+    </style>
 </head>
 <body>
-    
+
+    <div class="container">
+        <header>
+            <h1>Test Webpage Environment</h1>
+            <p>Use this simple layout to verify rendering, styles, and basic JavaScript actions.</p>
+        </header>
+
+        <main>
+            <!-- DOM & Interaction Test Section -->
+            <section class="card">
+                <h2>1. Interactive Elements Test</h2>
+                <p>Click the button below to verify if your DOM Event Listeners or JavaScript files are executing correctly.</p>
+                <div class="flex-group">
+                    <button id="testBtn" onclick="runTest()">Click Me</button>
+                    <button id="resetBtn" onclick="resetTest()" style="background-color: #64748b;">Reset</button>
+                </div>
+                <p id="testOutput" class="status-box" style="margin-top: 15px;">Status: Waiting for interaction...</p>
+            </section>
+
+            <!-- Form Testing Section -->
+            <section class="card">
+                <h2>2. Form & Input Validation Test</h2>
+                <form id="testForm" onsubmit="handleFormSubmit(event)">
+                    <label for="username">Sample Input Field:</label>
+                    <input type="text" id="username" name="username" placeholder="Type something to test..." required>
+                    <button type="submit">Submit Data</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- Embedded Scripts for Direct Verification -->
+    <script>
+        function runTest() {
+            const output = document.getElementById('testOutput');
+            output.innerText = "✅ Success: JavaScript click event is firing properly!";
+            output.style.borderColor = "#22c55e";
+            output.style.backgroundColor = "#f0fdf4";
+        }
+
+        function resetTest() {
+            const output = document.getElementById('testOutput');
+            output.innerText = "Status: Waiting for interaction...";
+            output.style.borderColor = "#2563eb";
+            output.style.backgroundColor = "#f1f5f9";
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const inputValue = document.getElementById('username').value;
+            alert(`Form submitted successfully!\nCaptured Input: "${inputValue}"`);
+        }
+    </script>
 </body>
 </html>
